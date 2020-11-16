@@ -15,15 +15,24 @@ namespace ConsoleApp22
         {
             try
             {
-                Console.WriteLine($"Name\tTotalSize\tTotalFreeSpace");
-                var drives = DriveInfo.GetDrives();
-                foreach (var drive in drives)
+                Console.WriteLine("Введите количество носителей, которое следует отобразить:");
+                int count = int.Parse(Console.ReadLine());
+
+                if(count > 0)
                 {
-                    if(drive.IsReady)
-                        Console.WriteLine(drive.Name + "\t" + drive.TotalSize / toGB + "." + 
-                            Math.Round(drive.TotalSize % toGB / toMB) + "GB\t\t" + 
-                            drive.TotalFreeSpace / toGB + "." + 
-                            Math.Round(drive.TotalFreeSpace % toGB / toMB) +  "GB");
+                    Console.WriteLine($"Name\tTotalSize\tTotalFreeSpace");
+                    var drives = DriveInfo.GetDrives();
+                    var drivesCount = DriveInfo.GetDrives().Count();
+                    for(int i = 0; i <= count; i++)
+                    {
+                        if (i == drivesCount)
+                            break;
+                        if (drives[i].IsReady)
+                            Console.WriteLine(drives[i].Name + "\t" + drives[i].TotalSize / toGB + "." +
+                                Math.Round(drives[i].TotalSize % toGB / toMB) + "GB\t\t" +
+                                drives[i].TotalFreeSpace / toGB + "." +
+                                Math.Round(drives[i].TotalFreeSpace % toGB / toMB) + "GB");
+                    }
                 }
             }
             catch(Exception ex)
